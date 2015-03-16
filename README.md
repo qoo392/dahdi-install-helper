@@ -31,7 +31,8 @@ $make install
 
 ####Step 3:configure dahdi and asterisk
 #####1.comment out  wcte11xp in blocklist
-```/etc/modprobe.d/dahdi.blacklist
+```
+/etc/modprobe.d/dahdi.blacklist
 ```
 #####2.start all of it
 ```
