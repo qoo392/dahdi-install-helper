@@ -1,6 +1,6 @@
 # dahdi-install-helper
 How to install asterisk with dahdi driver
-####Step 1:Download Denpendency
+####Step 1:Download libpri and libss7
 #####1.libpri
 Get file from asterisk official site
 ```
@@ -43,7 +43,7 @@ $make install
 ####Step 3:configure dahdi and asterisk
 #####1.open dahdi.blocklist file 
 ```
-sudo vim /etc/modprobe.d/dahdi.blocklist
+$sudo vim /etc/modprobe.d/dahdi.blocklist
 ```
 #####2.delete or comment out wcte11xp in blocklist and add netjet module to blocklist
 
