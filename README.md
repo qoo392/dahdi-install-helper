@@ -1,58 +1,78 @@
 # dahdi-install-helper
-How to install asterisk with dahdi driver easily
+How to install asterisk with dahdi driver
 ####Step 1:Download Denpendency
 #####1.libpri
 Get file from asterisk official site
 ```
-$make 
-$make install
+$sudo make 
+$sudo make install
 ```
 #####2.libss7--ss7 singal
 ```
-$apt-get libss7-1 libss7-dev libss7-dbg
+$sudo apt-get install libss7-1 libss7-dev libss7-dbg
 ```
-#####3.opennr2--MFC/R2 (telephony) call setup library
+####Step 2:install dahdi 
+##### 1. install dahdi-tools
+```bash
+$sudo apt-get install libnewt-dev
+$sudo apt-get install libncurses5-dev
+$sudo apt-get install libtonezone-dev
+$sudo apt-get install fxload
+$cd tools
+$./configure
+$make 
 ```
-$apt-get libopenr2-3 libopenr2-bin libopenr2-dev
+
+#####2.install dahdi
 ```
-####Step 2:install dahdi and asterisk
-#####1.dahdi
-get lastest dahdi
-```
+$cd .. 
 $make && make install
 ```
-#####2.asterisk 
+#####3.asterisk 
+
+
 ```
+$sudo apt-get install libncurses-dev libz-dev libssl-dev libxml2-dev libsqlite3-dev libnewt-dev
 $./configure 
 $make menuselect (check chan_dahdi!!!)
 $make 
 $make install
+
 ```
 
 ####Step 3:configure dahdi and asterisk
-#####1.comment out  wcte11xp in blocklist
+#####1.open dahdi.blocklist file 
 ```
-/etc/modprobe.d/dahdi.blacklist
+sudo vim /etc/modprobe.d/dahdi.blocklist
 ```
-#####2.start all of it
+#####2.delete or comment out wcte11xp in blocklist and add netjet module to blocklist
+
 ```
-$modprobe dahdi  ; load dahdi driver
-$modprobe wcte11xp opermode=YOUR　COUNTRY; load the wctdm driver with your country 
-$dahdi_genconf  ;Generate configure files
-$dahdi_cfg –vvvv ; start channels
-$asterisk -rx "core restart now"
+blacklist netjet /* add this line or delete the first '#' character
+#blacklist wctellxp /*comment out*/
+```
+ 
+#####3.reboot and start all of it
+```
+$sudo reboot now
+$sudo modprobe dahdi  ; load dahdi driver
+$sudo modprobe wcte11xp opermode=YOUR　COUNTRY; load the wctdm driver with your country 
+$sudo dahdi_genconf  ;Generate configure files
+$sudo dahdi_cfg –vvvv ; start channels
+$sudo asterisk -rx "core restart now"
 ```
 or
 ```
-service dahdi start
 asterisk -rx "core restart now"
 ```
-#####3.check dahdi is ok
+#####4.check dahdi is ok
 ```
 $lsdahdi
 ```
 ####Troubleshooting
 
-check /etc/asterisk/chan_dahdi.conf
-[channels]
+check /etc/asterisk/chan_dahdi.conf  
+
+```[channels]
 \#include  /etc/asterisk/dahdi-channels.conf
+```
