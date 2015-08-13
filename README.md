@@ -70,9 +70,14 @@ asterisk -rx "core restart now"
 $lsdahdi
 ```
 ####Troubleshooting
+##### 1. HDLC abort problem 
+This may cause by acpi problem,add boot option `acpi=off`  
 
+1. In Ubuntu,edit /etc/default/grub ,add `acpi=off` in   `GRUB_CMDLINE_LINUX`  settings
+2. execute`sudo update-grub`  
+
+##### 2. No dahdi channel connected with asterisk  
 check /etc/asterisk/chan_dahdi.conf  
-
 ```[channels]
-\#include  /etc/asterisk/dahdi-channels.conf
+#include  /etc/asterisk/dahdi-channels.conf
 ```
