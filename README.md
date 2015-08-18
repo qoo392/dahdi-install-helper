@@ -81,3 +81,5 @@ check /etc/asterisk/chan_dahdi.conf
 ```[channels]
 #include  /etc/asterisk/dahdi-channels.conf
 ```
+####Reference 
+http://www.voip-info.org/wiki/view/Asterisk+PCI+bus+Troubleshooting
